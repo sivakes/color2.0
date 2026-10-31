@@ -10,8 +10,7 @@
 <body>
 <header>
   <b>Grade</b>
-  <nav id="pg"><button data-g="Color" class="on">Color</button><button data-g="Edit">Edit</button></nav>
-  <div class="act"><button id="open">Add</button><button id="cmp">Hold: before</button><button id="exp" class="pri">Export</button></div>
+  <div class="act"><button id="undo">Undo</button><button id="redo">Redo</button><button id="open">Add</button><button id="cmp">Hold: before</button></div>
 </header>
 <main>
   <section id="stage">
@@ -21,6 +20,7 @@
   </section>
   <aside><nav id="tabs"></nav><div id="pn"></div></aside>
 </main>
+<nav id="pg"><button data-g="Media">Media</button><button data-g="Cut">Cut</button><button data-g="Edit">Edit</button><button data-g="Color" class="on">Color</button><button data-g="Audio">Audio</button><button data-g="Deliver">Deliver</button></nav>
 <input type="file" id="file" accept="image/*,video/*,audio/*" multiple hidden>
 <script src="app.js"></script>
 </body>
