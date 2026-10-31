@@ -43,3 +43,6 @@ input[type=range]{width:100%;height:30px;accent-color:var(--ac);margin:0}
   #sc{width:130px;height:70px}
   button{padding:8px 10px}
 }
+#pg{gap:0;border-top:1px solid var(--ln);background:#101113;flex:none}
+#pg button{flex:1;border:0;border-top:2px solid transparent;border-radius:0;background:none;color:var(--mu);padding:12px 2px}
+#pg button.on{color:var(--ac);border-top-color:var(--ac);background:none}
