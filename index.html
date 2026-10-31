@@ -23,5 +23,37 @@
 </main>
 <input type="file" id="file" accept="image/*,video/*,audio/*" multiple hidden>
 <script src="app.js"></script>
+  <script src="js/persist.js"></script>
+<script src="js/history.js"></script>
+<script src="js/masks.js"></script>
+<script>
+(async () => {
+  // ⚠️ Intha 3 idathula unga site-oda variable names podanum
+  const getState = () => ({ /* unga grade values: exposure, contrast, lift, gamma... */ });
+  const setState = s => { /* values-a UI + render-la apply pannunga */ };
+  const PREVIEW  = '#preview';            // video/canvas element-oda selector
+
+  const saved = await Persist.get('app');
+  Masks.init({
+    preview: PREVIEW,
+    source: () => document.querySelector(PREVIEW),
+    saved: saved?.masks,
+    onSave: () => save(),
+    onChange: () => rerender(),           // unga render function
+    onCommit: label => GradeHistory.commit(label)
+  });
+  GradeHistory.init({
+    getState: () => ({ grade: getState(), masks: Masks.serialize() }),
+    setState: s => { setState(s.grade); Masks.load(s.masks); },
+    save: h => Persist.set('history', h),
+    saved: await Persist.get('history')
+  });
+  if (saved?.grade) setState(saved.grade);
+  const save = () => Persist.autosave('app', () => ({ grade: getState(), masks: Masks.serialize() }));
+
+  // Slider release / photo apply aagum podhu:  GradeHistory.commit('Exposure'); save();
+  // Media add pannum podhu: Persist.saveMedia(id, file);  Thirumba open-la: await Persist.loadMedia(id)
+})();
+</script>
 </body>
 </html>
